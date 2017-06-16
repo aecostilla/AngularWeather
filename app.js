@@ -1,4 +1,5 @@
 var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
+//api key 716198b9f309561d999bf34c36c09c14
 
 weatherApp.config(function($routeProvider){
   $routeProvider
@@ -27,6 +28,16 @@ weatherApp.controller('weatherController', ['$scope', 'cityService', function($s
     });
 }]);
 
-weatherApp.controller('forecastController', ['$scope', 'cityService', function($scope, cityService){
+weatherApp.controller('forecastController', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService){
     $scope.city = cityService.city;
+    $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",{ callback: "JSON_CALLBACK" }, { get: { method: "JSONP" }});
+    
+    $scope.weatherResult = 
+        $scope.weatherAPI.get({
+        q: $scope.city,
+        cnt: 2,
+        appid: "716198b9f309561d999bf34c36c09c14"
+    });
+    
+    console.log($scope.weatherResult);
 }]);
