@@ -1,7 +1,12 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">
+        <h3
+            style="cursor: pointer;"
+            class="panel-title"
+            ng-click="nowHidden = !nowHidden"
+        >
             {{ convertToDate({ stamp: weatherDay.dt }) | date: dateFormat }}
+            <span class="pull-right" ng-class="{ 'glyphicon glyphicon-chevron-up': nowHidden, 'glyphicon glyphicon-chevron-down': !nowHidden}"></span>
         </h3>
     </div>
     <div class="panel-body">
@@ -9,7 +14,7 @@
             <li class="list-group-item">
                 Day: {{ convertToTemp({ temp: weatherDay.temp.day }) }}
             </li>
-            <div>
+            <div ng-class="{ hidden: !nowHidden }">
             <li class="list-group-item">
                 High: {{ convertToTemp({ temp: weatherDay.temp.max }) }}
             </li>

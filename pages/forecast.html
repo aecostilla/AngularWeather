@@ -1,5 +1,7 @@
-<p>Forecast for {{ city }} </p>
-<hr />
+<div class="nav nav-header">
+    <h4 class="col-md-4 col-md-offset-4">Forecast for {{ city }} </h4>
+</div>
+
     <ul class="nav nav-tabs">
       <li role="presentation" ng-class="{ 'active': days === '3' }">
           <a href="#/forecast/3">3 Days</a>
@@ -11,7 +13,7 @@
           <a href="#/forecast/7">7 Days</a>
       </li>
     </ul>
-<hr />
+<br />
 <div ng-repeat="w in weatherResult.list">
     <div class="row">
         <div class="col-md-12">
@@ -19,6 +21,7 @@
               weather-day="w"
               convert-to-temp="convertTempF(temp)"
               convert-to-date="convertDate(stamp)"
+              now-hidden="isHidden"
               date-format="EEEE | MMM d, y"
             >
             </weather-Report>

@@ -56,6 +56,7 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
     $scope.convertDate = function(date){
         return new Date(date * 1000);
     };
+    $scope.isHidden = true;
 }]);
 
 weatherApp.directive("weatherReport", function(){
