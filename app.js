@@ -22,7 +22,7 @@ weatherApp.config(function($routeProvider){
 });
 
 weatherApp.service('cityService', function(){
-    this.city = "New York, NY";
+    this.city = "Laredo, TX";
 });
 
 weatherApp.controller('weatherController', ['$scope', 'cityService', function($scope, cityService){
@@ -53,3 +53,17 @@ weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParam
         return new Date(date * 1000);
     };
 }]);
+
+weatherApp.directive("weatherReport", function(){
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/weatherReport.html',
+        replace: true,
+        scope: {
+            weatherDay: '=',
+            convertToTemp: '&',
+            convertToDate: '&',
+            dateFormat: '@'
+        }
+    }
+});
