@@ -1,5 +1,4 @@
 var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
-//api key 716198b9f309561d999bf34c36c09c14
 
 weatherApp.config(function($routeProvider){
   $routeProvider
@@ -37,18 +36,30 @@ weatherApp.controller('weatherController', ['$scope', '$location', 'cityService'
     };
 }]);
 
-weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParams', 'cityService', function($scope, $resource, $routeParams, cityService){
+weatherApp.controller('forecastController', ['$scope', '$resource', '$routeParams','cityService', function($scope, $resource, $routeParams, cityService){
     $scope.city = cityService.city;
     $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily",{ callback: "JSON_CALLBACK" }, { get: { method: "JSONP" }});
-
     $scope.days = $routeParams.days || '3';
-    $scope.weatherResult =
+    $resource("key", {get: { method: "JSON" }}).get(function(data){
+        var newData = "";
+        for(var num in data){
+            console.log()
+            if(typeof data[num] === "string"){
+                newData += data[num];
+            }
+        }
+        
+        $scope.weatherResult =
         $scope.weatherAPI.get({
-        q: $scope.city,
-        cnt: $scope.days,
-        appid: "716198b9f309561d999bf34c36c09c14"
+            q: $scope.city,
+            cnt: $scope.days,
+            appid: newData
+        });
+        
+        return newData;
+    
     });
-
+    
     $scope.convertTempF = function(degK){
         return Math.round((1.8 * (degK - 273) + 32));
     };
