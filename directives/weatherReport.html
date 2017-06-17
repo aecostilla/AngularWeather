@@ -1,0 +1,31 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            {{ convertToDate({ stamp: weatherDay.dt }) | date: dateFormat }}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">
+                Day: {{ convertToTemp({ temp: weatherDay.temp.day }) }}
+            </li>
+            <div>
+            <li class="list-group-item">
+                High: {{ convertToTemp({ temp: weatherDay.temp.max }) }}
+            </li>
+            <li class="list-group-item">
+                Low: {{ convertToTemp({ temp: weatherDay.temp.min }) }}
+            </li>
+            <li class="list-group-item">
+                Morning: {{ convertToTemp({ temp: weatherDay.temp.morn }) }}
+            </li>
+            <li class="list-group-item">
+                Evening: {{ convertToTemp({ temp: weatherDay.temp.eve }) }}
+            </li>
+            <li class="list-group-item">
+                Night: {{ convertToTemp({ temp: weatherDay.temp.night }) }}
+            </li>
+            </div>
+        </ul>
+    </div>
+</div>
