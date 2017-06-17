@@ -1,1 +1,63 @@
 <p>Forecast for {{ city }} </p>
+<hr />
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-class="{ 'active': days === '3' }">
+          <a href="#/forecast/3">3 Days</a>
+      </li>
+      <li role="presentation" ng-class="{ 'active': days === '5' }">
+          <a href="#/forecast/5">5 Days</a>
+      </li>
+      <li role="presentation" ng-class="{ 'active': days === '7' }">
+          <a href="#/forecast/7">7 Days</a>
+      </li>
+    </ul>
+<hr />
+<div ng-repeat="w in weatherResult.list">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        {{ convertDate(w.dt) | date: 'MMM d, y'}}
+                    </h3>
+                </div>
+<!--
+<uib-accordion>
+<div> 
+<uib-accordion-group class="panel-default" is-open="status.open">
+<uib-accordion-heading>
+        I can have markup, too!
+    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}">
+    </i>
+</uib-accordion-heading>
+This is just some content to illustrate fancy headings.
+</uib-accordion-group>
+</div>
+</uib-accordion>
+-->
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            Day: {{ convertTempF(w.temp.day) }}
+                        </li>
+                        <li class="list-group-item">
+                            High: {{ convertTempF(w.temp.max) }}
+                        </li>
+                        <li class="list-group-item">
+                            Low: {{ convertTempF(w.temp.min) }}
+                        </li>
+                        <li class="list-group-item">
+                            Morning: {{ convertTempF(w.temp.morn) }}
+                        </li>
+                        <li class="list-group-item">
+                            Evening: {{ convertTempF(w.temp.eve) }}
+                        </li>
+                        <li class="list-group-item">
+                            Night: {{ convertTempF(w.temp.night) }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
